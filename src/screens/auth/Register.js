@@ -6,14 +6,13 @@ import CustomButton from '../../components/CustomButton';
 import CustomTextInput from '../../components/CustomTextInput';
 import { ROUTES } from '../../utils';
 
-const Login = () => {
-  // GETTER //SETTER
+const Register = () => {
+  const [name, setName] = useState('');
   const [emailAdd, setEmailAdd] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const navigation = useNavigation();
-
-  //   useEffect(() => {}, [emailAdd, password]);
 
   const cardStyle = {
     backgroundColor: '#fff',
@@ -39,6 +38,23 @@ const Login = () => {
       <View style={cardStyle}>
         <View style={{ alignItems: 'center', justifyContent: 'center' }}>
           <CustomTextInput
+            label={'Name'}
+            value={val => setName(val)}
+            containerStyle={{
+              width: '100%',
+              marginBottom: 15,
+            }}
+            labelStyle={{
+              fontSize: 20,
+              fontWeight: '500',
+            }}
+            textStyle={{
+              fontSize: 20,
+              color: '#000',
+            }}
+          />
+
+          <CustomTextInput
             label={'Email Address'}
             value={val => setEmailAdd(val)}
             containerStyle={{
@@ -60,6 +76,23 @@ const Login = () => {
             value={val => setPassword(val)}
             containerStyle={{
               width: '100%',
+              marginBottom: 15,
+            }}
+            labelStyle={{
+              fontSize: 20,
+              fontWeight: '500',
+            }}
+            textStyle={{
+              fontSize: 20,
+              color: '#000',
+            }}
+          />
+
+          <CustomTextInput
+            label={'Confirm Password'}
+            value={val => setConfirmPassword(val)}
+            containerStyle={{
+              width: '100%',
             }}
             labelStyle={{
               fontSize: 20,
@@ -73,7 +106,7 @@ const Login = () => {
         </View>
 
         <CustomButton
-          label={'LOGIN'}
+          label={'REGISTER'}
           containerStyle={{
             marginVertical: 20,
             width: '100%',
@@ -87,8 +120,12 @@ const Login = () => {
             fontSize: 20,
           }}
           onPress={() => {
-            if (emailAdd === '' && password === '') {
-              Alert.alert('Incorrect Credentials', 'Please try again!');
+            if (!name || !emailAdd || !password || !confirmPassword) {
+              Alert.alert('Missing fields', 'Please fill in all fields.');
+              return;
+            }
+            if (password !== confirmPassword) {
+              Alert.alert('Password mismatch', 'Passwords do not match.');
               return;
             }
           }}
@@ -96,15 +133,15 @@ const Login = () => {
 
         <TouchableOpacity
           style={{ flexDirection: 'row', justifyContent: 'center', paddingVertical: 8 }}
-          onPress={() => navigation.navigate(ROUTES.REGISTER)}
+          onPress={() => navigation.navigate(ROUTES.LOGIN)}
           activeOpacity={0.7}
         >
-          <Text>Not register yet?</Text>
-          <Text style={{ marginLeft: 5, color: '#4a92f8', fontWeight: '800' }}>Register</Text>
+          <Text>Already have an account?</Text>
+          <Text style={{ marginLeft: 5, color: '#4a92f8', fontWeight: '800' }}>Login</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 };
 
-export default Login;
+export default Register;
