@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Alert, Platform, Text, TouchableOpacity, View } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 import CustomButton from '../../components/CustomButton';
 import CustomTextInput from '../../components/CustomTextInput';
 import { ROUTES } from '../../utils';
+import { useDispatch, useSelector } from 'react-redux';
+import { resetRegister, userRegister } from '../../app/reducers/auth';
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -13,6 +15,25 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
 
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const { registerIsLoading, registerIsError, registerIsSuccess, registerErrorMessage } = useSelector(
+    state => state.auth,
+  );
+
+  useEffect(() => {
+    if (registerIsSuccess && !registerIsLoading) {
+      Alert.alert('Registered', 'Account created. Please login.');
+      dispatch(resetRegister());
+      navigation.navigate(ROUTES.LOGIN);
+    }
+  }, [dispatch, navigation, registerIsLoading, registerIsSuccess]);
+
+  useEffect(() => {
+    if (registerIsError && !registerIsLoading) {
+      Alert.alert('Register failed', registerErrorMessage || 'Please try again.');
+      dispatch(resetRegister());
+    }
+  }, [dispatch, registerErrorMessage, registerIsError, registerIsLoading]);
 
   const cardStyle = {
     backgroundColor: '#fff',
@@ -106,7 +127,7 @@ const Register = () => {
         </View>
 
         <CustomButton
-          label={'REGISTER'}
+          label={registerIsLoading ? 'Creating account...' : 'REGISTER'}
           containerStyle={{
             marginVertical: 20,
             width: '100%',
@@ -128,7 +149,16 @@ const Register = () => {
               Alert.alert('Password mismatch', 'Passwords do not match.');
               return;
             }
+            dispatch(
+              userRegister({
+                name: name.trim(),
+                email: emailAdd.trim(),
+                password,
+                confirmPassword,
+              }),
+            );
           }}
+          disabled={registerIsLoading}
         />
 
         <TouchableOpacity

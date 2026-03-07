@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Alert, Platform, Text, TouchableOpacity, View } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
@@ -6,14 +6,22 @@ import CustomButton from '../../components/CustomButton';
 import CustomTextInput from '../../components/CustomTextInput';
 import { ROUTES } from '../../utils';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { userLogin } from '../../app/reducers/auth';
+
 const Login = () => {
-  // GETTER //SETTER
   const [emailAdd, setEmailAdd] = useState('');
   const [password, setPassword] = useState('');
 
+  const { data, isLoading, isError } = useSelector(state => state.auth);
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
-  //   useEffect(() => {}, [emailAdd, password]);
+  useEffect(() => {
+    if (isError && !isLoading) {
+      Alert.alert('Login failed', 'Please check your email and password.');
+    }
+  }, [isError, isLoading]);
 
   const cardStyle = {
     backgroundColor: '#fff',
@@ -73,7 +81,7 @@ const Login = () => {
         </View>
 
         <CustomButton
-          label={'LOGIN'}
+          label={isLoading ? 'Logging in...' : 'LOGIN'}
           containerStyle={{
             marginVertical: 20,
             width: '100%',
@@ -87,11 +95,13 @@ const Login = () => {
             fontSize: 20,
           }}
           onPress={() => {
-            if (emailAdd === '' && password === '') {
-              Alert.alert('Incorrect Credentials', 'Please try again!');
+            if (!emailAdd.trim() || !password) {
+              Alert.alert('Missing fields', 'Please enter email and password.');
               return;
             }
+            dispatch(userLogin({ email: emailAdd.trim(), password }));
           }}
+          disabled={isLoading}
         />
 
         <TouchableOpacity

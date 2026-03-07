@@ -1,7 +1,12 @@
 import { Image, Text, View } from 'react-native';
 import { IMG } from '../utils';
+import { useDispatch } from 'react-redux';
+import { userLogout } from '../app/reducers/auth';
+import CustomButton from '../components/CustomButton';
 
 const ProfileScreen = () => {
+  const dispatch = useDispatch();
+
   return (
     <View
       style={{
@@ -22,6 +27,23 @@ const ProfileScreen = () => {
         }}
       />
       <Text>ProfileScreen</Text>
+
+      <CustomButton
+        label={'LOGOUT'}
+        containerStyle={{
+          marginTop: 20,
+          width: '80%',
+          backgroundColor: '#ff8b8b',
+          borderRadius: 10,
+        }}
+        textStyle={{
+          color: '#ffffff',
+          textAlign: 'center',
+          fontWeight: '800',
+          fontSize: 20,
+        }}
+        onPress={() => dispatch(userLogout())}
+      />
     </View>
   );
 };
