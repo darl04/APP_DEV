@@ -1,0 +1,33 @@
+import { verifyInstallation } from 'nativewind';
+import React from 'react';
+import { View, ActivityIndicator } from 'react-native';
+
+import AppNavigationNi from './src/navigations';
+
+import rootSaga from './src/app/sagas';
+import configureStore from './src/app/reducers';
+
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+
+const { store, persistor, runSaga } = configureStore();
+runSaga(rootSaga);
+
+const App = () => {
+  verifyInstallation();
+
+  return (
+    <Provider store={store}>
+      <PersistGate
+        loading={<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}><ActivityIndicator size="large" /></View>}
+        persistor={persistor}
+      >
+        <View className="flex-1">
+          <AppNavigationNi />
+        </View>
+      </PersistGate>
+    </Provider>
+  );
+};
+
+export default App;
