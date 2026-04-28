@@ -1,5 +1,6 @@
 {
     "java.compile.nullAnalysis.mode": "automatic",
+    "java.import.gradle.enabled": false,
     "java.import.exclusions": [
         "**/node_modules/**",
         "**/android/build/**",
