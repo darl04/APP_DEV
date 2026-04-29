@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { verifyInstallation } from 'nativewind';
 import React from 'react';
 import { View, ActivityIndicator } from 'react-native';
@@ -31,3 +32,19 @@ const App = () => {
 };
 
 export default App;
+=======
+import React from 'react';
+import { View } from 'react-native';
+
+import AppNavigationNi from './src/navigations';
+
+const App = () => {
+  return (
+    <View style={{ flex: 1 }}>
+      <AppNavigationNi />
+    </View>
+  );
+};
+
+export default App;
+>>>>>>> origin/main

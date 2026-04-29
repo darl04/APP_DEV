@@ -6,4 +6,8 @@ export default {
   // Main
   HOME: 'Home',
   PROFILE: 'Profile',
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> origin/main
