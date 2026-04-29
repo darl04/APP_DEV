@@ -13,12 +13,20 @@ const ProfileScreen = () => {
       }}
     >
       <Image
+<<<<<<< HEAD
+        source={IMG.LOGO}
+        resizeMode="contain"
+          style={{
+            width: 200,
+            height: 200,
+=======
         source={{
           uri: IMG.LOGO,
         }}
         style={{
           width: 200,
           height: 200,
+>>>>>>> origin/main
         }}
       />
       <Text>ProfileScreen</Text>
@@ -26,4 +34,8 @@ const ProfileScreen = () => {
   );
 };
 
+<<<<<<< HEAD
 export default ProfileScreen;
+=======
+export default ProfileScreen;
+>>>>>>> origin/main

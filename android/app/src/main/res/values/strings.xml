@@ -1,3 +1,7 @@
 <resources>
+<<<<<<< HEAD
+    <string name="app_name">Dramatique</string>
+=======
     <string name="app_name">Dimagnaong</string>
+>>>>>>> origin/main
 </resources>

@@ -80,6 +80,10 @@ android {
     namespace "com.dimagnaong"
     defaultConfig {
         applicationId "com.dimagnaong"
+<<<<<<< HEAD
+        
+=======
+>>>>>>> origin/main
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

@@ -1,8 +1,25 @@
 {
   "extends": "@react-native/typescript-config",
   "compilerOptions": {
+<<<<<<< HEAD
+    "types": [
+      "jest"
+    ]
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "App.js",
+    "nativewind-env.d.ts"
+  ],
+  "exclude": [
+    "**/node_modules",
+    "**/Pods"
+  ]
+=======
     "types": ["jest"],
   },
   "include": ["**/*.ts", "**/*.tsx", "App.js"],
   "exclude": ["**/node_modules", "**/Pods"]
+>>>>>>> origin/main
 }

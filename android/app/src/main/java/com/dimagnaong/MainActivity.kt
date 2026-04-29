@@ -13,7 +13,11 @@ class MainActivity : ReactActivity() {
    * Returns the name of the main component registered from JavaScript. This is used to schedule
    * rendering of the component.
    */
+<<<<<<< HEAD
+  override fun getMainComponentName(): String = "Dimagnong"
+=======
   override fun getMainComponentName(): String = "Dimagnaong"
+>>>>>>> origin/main
 
   override fun onCreate(savedInstanceState: Bundle?) {
     supportFragmentManager.fragmentFactory = RNScreensFragmentFactory()
@@ -26,4 +30,9 @@ class MainActivity : ReactActivity() {
    */
   override fun createReactActivityDelegate(): ReactActivityDelegate =
       DefaultReactActivityDelegate(this, mainComponentName, fabricEnabled)
+<<<<<<< HEAD
 }
+
+=======
+}
+>>>>>>> origin/main
